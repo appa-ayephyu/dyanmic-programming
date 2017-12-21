@@ -1,0 +1,49 @@
+option solver cplexamp;
+option presolve_eps 1.0e-5;
+#option ipopt_options 'max_cpu_time=120 max_iter=1000 tol=1e-6';
+
+model dobss.mod;
+data dobss.dat;
+solve;
+
+#printf "%f\n",_solve_time > timeP1.txt;
+
+#display value > value.txt;
+#display coverage > defender_strat.txt;
+#display attack > attacker_strat.txt;
+#display coverageAttacker > coverage_attacker.txt;
+printf "%f\n", objective > objective_dobss.txt;
+
+
+#display objective > objective.txt;
+#printf "%f\n",v[1] > value.txt;
+#printf "" > defender_strat.txt;
+printf "" > attacker_strat_dobss.txt;
+
+for {i in JJ} {
+	printf "%d\n",q[1,i] >> attacker_strat_dobss.txt;
+}
+
+printf "" > defender_strat_dobss.txt;
+
+for {i in II} {
+	for {j in JJ} {
+	        if j = n2 then {
+			printf "%.12f\n",Z[1,i,j] >> defender_strat_dobss.txt;
+               }
+		else {
+			printf "%.12f ",Z[1,i,j] >> defender_strat_dobss.txt;
+                }
+        }
+}
+
+#for {i in 1..T} {
+#	for {j in 1..T} {
+#		if j = T then {
+#			printf "%d\n",a[i,j] >> attacker_strat.txt;
+#		}
+#                else {
+#                      	printf "%d ",a[i,j] >> attacker_strat.txt;
+#		}
+#	}
+#}

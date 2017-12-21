@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="backup_server_20120104/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="dist/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/conj3_error_3_targets_2nd_example/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/conj3_error_3targets_20120109/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/data_updated_payoffs_5000_iter_20120107/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/more_data_longer_runtime_errors_20120108/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/P1-P3tests/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/P4_test/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/results_SSS_paper_20120109/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/sample_data_20120107/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/sample_error_simple_20120107/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/test_attUtil_20120111/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="lib" path="test/test_conj3/SecurityGamesLimitSurveil.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

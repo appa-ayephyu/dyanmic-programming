@@ -1,0 +1,285 @@
+package securitygameslimitsurveil;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
+public class OPTSAttackerStoppingProblem {
+	public SecurityGame sg;
+	public double lambda;
+	public int numPureStrategies;
+	public List<Double> alpha;
+	public List<Set<Integer>> pureStrategies;
+	double alphaSum;
+	
+	public Map<Map<Integer, Integer>, Double> cachedMaxValueMap;
+	public Map<Map<Integer, Integer>, Double> cachedMinValueMap;
+	
+	public double finalMaxValue;
+	public double finalMinValue;
+	
+	public OPTSAttackerStoppingProblem(SecurityGame sg, int depth, double lambda){
+		this.sg = sg;
+		this.lambda = lambda;
+
+        CombinationGenerator cg = new CombinationGenerator(sg.numTargets, sg.numResources);
+        
+        this.numPureStrategies = cg.getTotal().intValue();
+        this.pureStrategies = new ArrayList<Set<Integer>>();
+        
+        this.cachedMaxValueMap = new HashMap<Map<Integer, Integer>, Double>();
+        this.cachedMinValueMap = new HashMap<Map<Integer, Integer>, Double>();
+        
+        while (cg.hasMore()) {
+            int[] strategy = cg.getNext();
+            
+            Set<Integer> strategySet = new HashSet<Integer>();
+            
+            for(int i = 0; i < strategy.length; i++){
+            	strategySet.add(strategy[i]);
+            }
+            
+            this.pureStrategies.add(strategySet);
+        }
+
+        this.alpha = new ArrayList<Double>();
+
+        for(int i = 0; i < this.numPureStrategies; i++){
+        	this.alpha.add(0.0);
+        }
+        
+        this.alphaSum = 0.0;
+        
+        for(int i = 0; i < alpha.size(); i++){
+        	this.alphaSum += alpha.get(i);
+        }
+        
+		computeOptimalObservationTree(depth);
+	}
+	
+	public static void main(String[] args){
+		long seed = System.currentTimeMillis();
+		//long seed = 1347953947421L;
+		
+		SecurityGame sg = new SecurityGame(5,1);
+		sg.initializeRandom(seed);
+		
+		List<Double> alpha = new ArrayList<Double>();
+		
+		for(int i = 0; i < sg.numTargets; i++){
+			alpha.add(1.0);
+		}
+		
+		for(int depth = 1; depth < 10; depth++){
+			long startTime = System.currentTimeMillis();
+			OPTSAttackerStoppingProblem opts = new OPTSAttackerStoppingProblem(sg, depth, 1.0);
+		
+			double runTime = (System.currentTimeMillis() - startTime) / 1000.0;
+			
+			System.out.println(seed + " " + sg.numTargets + " " + sg.numResources + " " + depth + " " + opts.finalMaxValue + " " + opts.finalMinValue + " " + runTime);
+		}
+	}
+	
+	public OPTSTreeNode computeOptimalObservationTree(int depth){
+		OPTSTreeNode observationTree = new OPTSTreeNode(numPureStrategies, depth);
+			
+		finalMaxValue = computeMaxValue(observationTree);
+		finalMinValue = computeMinValue(observationTree);
+			
+		return observationTree;
+	}
+	
+	public boolean compareMaxMinValues(OPTSTreeNode node){
+		if(node.maxValue != node.minValue){
+			return false;
+		}
+		else if(node.children == null){
+			return true;
+		}
+		else{
+			for(int i = 0; i < node.children.size(); i++){
+				if(!compareMaxMinValues(node.children.get(i))){
+					return false;
+				}
+			}
+			
+			return true;
+		}
+	}
+	
+	public double computeMaxValue(OPTSTreeNode node){
+		if(cachedMaxValueMap.containsKey(node.observationMap)){
+			return cachedMaxValueMap.get(node.observationMap);
+		}
+		else if(node.children == null){
+			double w = computeImmediateMaxValue(node);
+			node.setMaxValue(w);
+			node.setMaxDecision(OPTSTreeNode.ATTACK);
+		}
+		else{
+			double v = computeFutureMaxValue(node);
+			double w = computeImmediateValue(node);
+			
+			if(v > w){
+				node.setMaxValue(v);
+				node.setMaxDecision(OPTSTreeNode.OBSERVE);
+			}
+			else{
+				node.setMaxValue(w);
+				node.setMaxDecision(OPTSTreeNode.ATTACK);
+			}
+		}
+		
+		cachedMaxValueMap.put(node.observationMap, node.maxValue);
+		
+		return node.maxValue;
+	}
+	
+	public double computeMinValue(OPTSTreeNode node){
+		if(cachedMinValueMap.containsKey(node.observationMap)){
+			return cachedMinValueMap.get(node.observationMap);
+		}
+		
+		double w = computeImmediateValue(node);
+		
+		if(node.children == null){
+			node.setMinValue(w);
+			node.setMinDecision(OPTSTreeNode.ATTACK);
+		}
+		else{
+			double v = computeFutureMinValue(node);
+			
+			if(v > w){
+				node.setMinValue(v);
+				node.setMinDecision(OPTSTreeNode.OBSERVE);
+			}
+			else{
+				node.setMinValue(w);
+				node.setMinDecision(OPTSTreeNode.ATTACK);
+			}
+		}
+		
+		cachedMinValueMap.put(node.observationMap, node.minValue);
+		
+		return node.minValue;
+	}
+	
+	public double computeFutureMaxValue(OPTSTreeNode node){
+		double value = 0;
+		
+		for(int i = 0; i < node.children.size(); i++){
+			value += computeStrategyProbability(node, i) * computeMaxValue(node.children.get(i));
+		}
+		
+		return value;
+	}
+	
+	public double computeFutureMinValue(OPTSTreeNode node){
+		double value = 0;
+		
+		for(int i = 0; i < node.children.size(); i++){
+			value += computeStrategyProbability(node, i) * computeMinValue(node.children.get(i));
+		}
+		
+		return value;
+	}
+	
+	public double computeImmediateMaxValue(OPTSTreeNode node){
+		int numObservations = node.getNumObservations();
+		List<Target> targetList = new ArrayList<Target>(sg.setTargets);
+		
+		Collections.sort(targetList);
+		
+		double highestAttackerPayoff = Double.NEGATIVE_INFINITY;
+		
+		for(int i = 0; i < targetList.size(); i++){
+			if(targetList.get(i).attUncovPayoff > highestAttackerPayoff){
+				highestAttackerPayoff = targetList.get(i).attUncovPayoff;
+			}
+		}
+		
+		return highestAttackerPayoff - (numObservations * lambda);
+	}
+	
+	public double computeImmediateValue(OPTSTreeNode node){
+		int numObservations = node.getNumObservations();
+		
+		List<Double> coverageVector = computeCoverageVector(node);
+		List<Target> targetList = new ArrayList<Target>(sg.setTargets);
+		
+		Collections.sort(targetList);
+		
+		double highestAttackerPayoff = Double.NEGATIVE_INFINITY;
+		int attackedTarget = -1;
+		
+		for(int i = 0; i < targetList.size(); i++){
+			double attackerCoveredPayoff = coverageVector.get(i) * targetList.get(i).attCovPayoff;
+			double attackerUncoveredPayoff = (1 - coverageVector.get(i)) * targetList.get(i).attUncovPayoff;
+			double attackerPayoff = attackerCoveredPayoff + attackerUncoveredPayoff;
+			
+			if(attackerPayoff > highestAttackerPayoff){
+				highestAttackerPayoff = attackerPayoff;
+				attackedTarget = i;
+			}
+			else if(attackerPayoff == highestAttackerPayoff){
+				double previousDefenderCoveredPayoff = coverageVector.get(attackedTarget) * targetList.get(attackedTarget).defCovPayoff;
+				double previousDefenderUncoveredPayoff = (1 - coverageVector.get(attackedTarget)) * targetList.get(attackedTarget).defUncovPayoff;
+				double previousDefenderPayoff = previousDefenderCoveredPayoff + previousDefenderUncoveredPayoff;
+				
+				double currentDefenderCoveredPayoff = coverageVector.get(i) * targetList.get(i).defCovPayoff;
+				double currentDefenderUncoveredPayoff = (1 - coverageVector.get(i)) * targetList.get(i).defUncovPayoff;
+				double currentDefenderPayoff = currentDefenderCoveredPayoff + currentDefenderUncoveredPayoff; 
+				
+				if(currentDefenderPayoff > previousDefenderPayoff){
+					attackedTarget = i;
+				}
+			}
+		}
+		
+		node.setAttackedTarget(attackedTarget);
+		
+		return highestAttackerPayoff - (lambda * numObservations);
+	}
+	
+	public double computeStrategyProbability(OPTSTreeNode node, int pureStrategy){
+		int timesObserved = 0;
+		
+		if(node.observationMap.containsKey(pureStrategy)){
+			timesObserved = node.observationMap.get(pureStrategy);
+		}
+		
+		double numerator = alpha.get(pureStrategy) + timesObserved + 1;
+		double denominator = alphaSum + numPureStrategies + node.getNumObservations();
+		
+		return numerator / denominator;
+	}
+
+	public List<Double> computeCoverageVector(OPTSTreeNode node){
+		List<Double> coverageVector = new ArrayList<Double>();
+		
+		double denominator = alphaSum + numPureStrategies + node.getNumObservations();
+		
+		for(int i = 0; i < sg.numTargets; i++){
+			double numerator = 0;
+			
+			for(int j = 0; j < numPureStrategies; j++){
+				if(pureStrategies.get(j).contains(i)){
+					int timesObserved = 0;
+					
+					if(node.observationMap.containsKey(j)){
+						timesObserved = node.observationMap.get(j);
+					}
+					numerator += (alpha.get(j) + timesObserved + 1);
+				}
+			}
+			
+			coverageVector.add(numerator / denominator);
+		}
+		
+		return coverageVector;
+	}
+}

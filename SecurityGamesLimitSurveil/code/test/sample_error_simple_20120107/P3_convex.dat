@@ -1,0 +1,37 @@
+data;
+param nTargets := 2;
+param observationSpace := 4;
+param nDefStrategies := 2;
+param Ospace : 1 2 := 
+1 0 3 
+2 1 2 
+3 2 1 
+4 3 0 
+;
+param preProb
+1  1
+2  3
+3  3
+4  1
+;
+param A : 1 2 := 
+1 1 0 
+2 0 1 
+;
+param defenderCoveredPayoff
+1  45
+2  47
+;
+param defenderUncoveredPayoff
+1  -73
+2  -71
+;
+param attackerCoveredPayoff
+1  -45
+2  -47
+;
+param attackerUncoveredPayoff
+1  73
+2  71
+;
+end;

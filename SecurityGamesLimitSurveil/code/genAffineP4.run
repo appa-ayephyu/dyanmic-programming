@@ -1,0 +1,50 @@
+option solver cplexamp;
+option presolve_eps 1.0e-5;
+#option ipopt_options 'max_cpu_time=120 max_iter=1000 tol=1e-6';
+
+model genAffineP4.mod;
+data genAffineP4.dat;
+solve;
+
+printf "%f\n",_solve_time > timegenAffineP4.txt;
+
+#display value > value.txt;
+#display coverage > defender_strat.txt;
+#display attack > attacker_strat.txt;
+#display coverageAttacker > coverage_attacker.txt;
+#printf "%f\n", objective > objective.txt;
+
+
+#display objective > objective.txt;
+#printf "%f\n",v[1] > value.txt;
+#printf "" > defender_strat.txt;
+printf "" > affine_b.txt;
+
+for {i in functionPoints} {
+	for {j in defstrategies} {
+	        if j = nDefStrategies then {
+			printf "%.12f\n",b[i,j] >> affine_b.txt;
+               }
+		else {
+			printf "%.12f ",b[i,j] >> affine_b.txt;
+                }
+        }
+}
+
+printf "" > affine_e.txt;
+
+for {i in functionPoints} {
+	printf "%.12f\n",e[i] >> affine_e.txt;
+}
+
+
+#for {i in 1..T} {
+#	for {j in 1..T} {
+#		if j = T then {
+#			printf "%d\n",a[i,j] >> attacker_strat.txt;
+#		}
+#                else {
+#                      	printf "%d ",a[i,j] >> attacker_strat.txt;
+#		}
+#	}
+#}

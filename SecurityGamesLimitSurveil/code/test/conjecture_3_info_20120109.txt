@@ -1,0 +1,49 @@
+For the 6 target situation:
+The observations (in order from target 1-6): 2 1 1 1 0 0 
+
+attackerUncoveredPayoff
+1  85
+2  75
+3  73
+4  70
+5  70
+6  43
+--------------------
+
+Ran over 20,000 iterations for 3 targets with observations from 3-9 and did not get any error case.
+
+For 3 target situation:
+The observations (in order from target 1-3): 5 5 0 
+
+attackerUncoveredPayoff
+1  89
+2  88
+3  52
+
+Raw Coverage
+1  0.502022
+2  0.497978
+3  6.85537e-09
+
+Outputted:
+0.502022
+0.497978
+0.000000
+----------------------------
+2nd example with 3 targets and 10 observations:
+The observations: 5 5 0 
+
+param attackerUncoveredPayoff
+1  95
+2  95
+3  56
+
+Raw Coverage
+1  0.5
+2  0.5
+3  9.80753e-09
+
+Outputted:
+0.500000
+0.500000
+0.000000

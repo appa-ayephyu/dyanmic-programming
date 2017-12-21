@@ -1,0 +1,72 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package securitygameslimitsurveil;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author teamcore
+ */
+public class AttackerUtility {
+	protected static int nTargets;
+    protected static int nObservationSpace;
+    protected static int nStrategies;
+    protected static double discountFactor;
+    protected static double rawUtility;
+    protected static double finalUtility;
+
+    public static double ObjectiveValue(ArrayList<Double> x) {
+    	double[] c = new double[nTargets];
+        double[] k = new double[nObservationSpace];
+        ArrayList<Long> preProb = GenerateGameFiles.preProbList;
+
+        //Compute c_j (or the marginal)
+        for (int j = 0; j < nTargets; j++) {
+
+            double coverage = 0.0;
+            for (int i = 0; i < nStrategies; i++) {
+                int[] strategy = PureStrategies.globalList.get(i);
+                coverage += strategy[j]*x.get(i);
+            }
+            c[j] = coverage;
+        }
+    
+        // Compute k^o
+        for (int i = 0; i < nObservationSpace; i++) {
+            int j = P1.attackList.get(i) - 1;
+            k[i] = c[j]*(GenerateGameFiles.attCov.get(j) - GenerateGameFiles.attUncov.get(j)) +
+                    GenerateGameFiles.attUncov.get(j);
+        }
+
+        // Compute objective value
+        double objective = 0.0;
+        for (int i = 0; i < nObservationSpace; i++) {
+
+            double prod = 1.0;
+            for (int j = 0; j < nStrategies; j++) {
+                prod = prod * Math.pow(x.get(j), Observations.globalList.get(i).get(j));
+            }
+            prod = prod * preProb.get(i) * k[i];
+
+            objective += prod;
+        }
+
+        return objective;
+    }
+
+    public static void Solve(double discount, ArrayList<Double> x) {
+        nTargets = GenerateGameFiles.nTargets;
+        nObservationSpace = Observations.globalList.size();
+        nStrategies = PureStrategies.globalList.size();
+        discountFactor = discount;
+
+        rawUtility = ObjectiveValue(x);
+        //finalUtility = Math.pow(discount, GenerateGameFiles.nObserves) * rawUtility;
+        finalUtility = rawUtility - (discount*GenerateGameFiles.nObserves);
+        
+    }
+}

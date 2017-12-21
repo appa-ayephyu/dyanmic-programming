@@ -1,0 +1,390 @@
+KNITRO 8.0.0: 
+======================================
+  Academic Ziena License (NOT FOR COMMERCIAL USE)
+             KNITRO 8.0.0
+          Ziena Optimization
+======================================
+
+No start point provided -- KNITRO computing one.
+
+KNITRO presolve eliminated 0 variables and 0 constraints.
+
+hessian_no_f:         1
+par_concurrent_evals: 0
+KNITRO changing bar_switchrule from AUTO to 2.
+KNITRO changing algorithm from AUTO to 1.
+KNITRO changing bar_murule from AUTO to 4.
+KNITRO changing bar_initpt from AUTO to 2.
+KNITRO changing bar_penaltyrule from AUTO to 2.
+KNITRO changing bar_penaltycons from AUTO to 1.
+KNITRO changing linsolver from AUTO to 2.
+
+Problem Characteristics
+-----------------------
+Objective goal:  Minimize
+Number of variables:                     8
+    bounded below:                       0
+    bounded above:                       0
+    bounded below and above:             2
+    fixed:                               0
+    free:                                6
+Number of constraints:                   7
+    linear equalities:                   7
+    nonlinear equalities:                0
+    linear inequalities:                 0
+    nonlinear inequalities:              0
+    range:                               0
+Number of nonzeros in Jacobian:         14
+Number of nonzeros in Hessian:           6
+
+  Iter      Objective      FeasError   OptError    ||Step||    CGits 
+--------  --------------  ----------  ----------  ----------  -------
+       0    1.922708e+01   6.387e+01
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+      10    2.100101e+01   1.522e-01   1.767e+00   2.022e-02        5
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+      20    3.761647e+01   1.522e-01   1.767e+00   1.475e-09        4
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+WARNING: Evaluation error occurred in user routine for func_callback.
+
+EXIT: Current infeasible solution estimate cannot be improved. Problem may
+      be badly scaled or perhaps infeasible. If problem is believed to be
+      feasible, try multistart to search for feasible points.
+
+Final Statistics
+----------------
+Final objective value               =   5.05250516428082e+01
+Final feasibility error (abs / rel) =   1.52e-01 / 1.52e-01
+Final optimality error  (abs / rel) =   1.77e+00 / 1.77e+00
+# of iterations                     =         28 
+# of CG iterations                  =        232 
+# of function evaluations           =        351
+# of gradient evaluations           =         28
+# of Hessian evaluations            =         28
+Total program time (secs)           =       0.01088 (     0.012 CPU time)
+Time spent in evaluations (secs)    =       0.00068
+
+===============================================================================
+
+Current infeasible solution estimate cannot be improved.
+objective 50.52505164; feasibility error 0.152
+28 iterations; 351 function evaluations

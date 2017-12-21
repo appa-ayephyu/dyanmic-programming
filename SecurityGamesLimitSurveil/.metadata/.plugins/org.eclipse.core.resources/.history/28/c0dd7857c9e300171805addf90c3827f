@@ -1,0 +1,53 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package securitygameslimitsurveil;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author teamcore
+ */
+public class Observations {
+
+    public static int nTargets;
+    public static int nObservations;
+    public static ArrayList<ArrayList<Integer>> globalList1;
+
+    public static void Iterate(ArrayList<Integer> currList, int remainingObserves,
+            int remainingTargets) {
+    	System.out.println("initial globalList" + globalList.size());
+        if (remainingTargets == 1) {
+            ArrayList<Integer> tempList = new ArrayList<Integer>();
+            tempList.addAll(currList);
+            tempList.add(remainingObserves);
+            globalList1.add(tempList);
+            System.out.println(globalList1.size());
+        } else {
+            for (int i = 0; i <=remainingObserves; i++) {
+                ArrayList<Integer> tempList = new ArrayList<Integer>();
+                tempList.addAll(currList);
+                tempList.add(i);
+                Iterate(tempList, remainingObserves -i, remainingTargets-1);
+            }
+        }
+    }
+
+    public static void GenerateObservations() {
+
+       // for (int i = 0; i <= nObservations; i++) {
+                ArrayList<Integer> tempList = new ArrayList<Integer>();
+       //         tempList.add(i);
+                Iterate(tempList, nObservations, nTargets);
+       // }
+
+    }
+
+    public static void init(int numTargets, int numObserve) {
+        nTargets = numTargets;
+        nObservations = numObserve;
+        globalList1 = new ArrayList<ArrayList<Integer>>();
+    }
+}

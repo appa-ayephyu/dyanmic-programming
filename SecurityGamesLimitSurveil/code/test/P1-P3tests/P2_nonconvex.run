@@ -1,0 +1,44 @@
+option solver knitroampl;
+option presolve_eps 1.0e-5;
+#option ipopt_options 'max_cpu_time=120 max_iter=1000 tol=1e-6';
+
+model P2_nonconvex.mod;
+data P2_nonconvex.dat;
+solve;
+
+printf "%f\n",_solve_time > timeP2.txt;
+
+#display value > value.txt;
+display x > defender_strat.txt;
+display marginal > marginals.txt;
+#display attack > attacker_strat.txt;
+#display coverageAttacker > coverage_attacker.txt;
+printf "%f\n", objective > objectiveP2.txt;
+
+
+#display objective > objectiveP2.txt;
+#printf "%f\n",v[1] > value.txt;
+#printf "" > defender_strat.txt;
+#printf "" > attacker_strat.txt;
+
+#for {i in observations} {
+#	for {j in targets} {
+#	        if j = nTargets then {
+#			printf "%d\n",attack[i,j] >> attacker_strat.txt;
+#               }
+#		else {
+#			printf "%d ",attack[i,j] >> attacker_strat.txt;
+#                }
+#        }
+#}
+
+#for {i in 1..T} {
+#	for {j in 1..T} {
+#		if j = T then {
+#			printf "%d\n",a[i,j] >> attacker_strat.txt;
+#		}
+#                else {
+#                      	printf "%d ",a[i,j] >> attacker_strat.txt;
+#		}
+#	}
+#}
