@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UndirectedGraph {
-	private class Node{
+	public class Node{
 		List<Integer> neighbors;
 		int number;
 		int xPosition;
@@ -13,7 +13,13 @@ public class UndirectedGraph {
 		public Node(int number) {
 			this.number = number;
 			this.neighbors = new ArrayList<Integer>();
+			
 		}
+		
+		public int getNumber() {
+			return this.number;
+		}
+
 	}
 	
 	private int numberOfNodes = 0;
@@ -24,7 +30,7 @@ public class UndirectedGraph {
 	public int width;
 	public int length;
 	
-	public UndirectedGraph(int numbeOfNodes) {
+	public UndirectedGraph(int numberOfNodes) {
 		graph =new ArrayList<Node>();
 		addNodes(numberOfNodes);
 	}
@@ -37,7 +43,7 @@ public class UndirectedGraph {
 	
 	public void addNode() {
 		Node newNode = new Node(numberOfNodes);
-		newNode.neighbors.add(newNode.number);
+		//newNode.neighbors.add(newNode.number);
 		this.graph.add(newNode);
 		this.numberOfNodes++;
 	}
@@ -54,9 +60,7 @@ public class UndirectedGraph {
 		return (graph.get(i).neighbors.contains(j) && graph.get(j).neighbors.contains(i));
 	}
 	
-	public int getNumberOfNeighbors(int i) {
-		return (graph.get(i).neighbors.size());
-	}
+	
 	
 	public static UndirectedGraph createGridGraph(int length, int width) {
 		UndirectedGraph grid = new UndirectedGraph(length*width);
@@ -65,10 +69,10 @@ public class UndirectedGraph {
 		grid.width = width;
 		for(int i=0;i<width-1; i++) {
 			for(int j=0; j<length; j++) {
-				grid.graph.get(i*length*j).xPosition=i;
-				grid.graph.get(i*length*j).yPosition=j;
-				grid.addEdge(i*length*j, i*length*j+1);
-				grid.addEdge(i*length*j, i*length+j+length);
+				grid.graph.get(i*length+j).xPosition=i;
+				grid.graph.get(i*length+j).yPosition=j;
+				grid.addEdge(i*length+j, i*length+j+1);
+				grid.addEdge(i*length+j, i*length+j+length);
 			}
 		}
 		for(int j=0; j<length-1; j++) {
@@ -108,4 +112,26 @@ public class UndirectedGraph {
 			this.distanceMatrix = distanceMatrix;
 		}
 	}
+	
+	//getters
+	public List<Integer> getNeighbors(int i){
+		return graph.get(i).neighbors;
+	}
+	
+	public int getNumberOfNeighbors(int i) {
+		return (graph.get(i).neighbors.size());
+	}
+	
+	public int getNumberOfNodes() {
+		return numberOfNodes;
+	}
+	
+	public int getNumberOfEdges() {
+		return numberOfEdges;
+	}
+	
+	public List<Node> getGraph(){
+		return graph;
+	}
+	
 }
