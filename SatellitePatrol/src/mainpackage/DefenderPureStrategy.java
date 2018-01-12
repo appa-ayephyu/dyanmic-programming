@@ -1,9 +1,9 @@
 package mainpackage;
 
 public class DefenderPureStrategy {
-	Integer[][][] imagingStatus;
+	double[][][] imagingStatus;
 	
 	public DefenderPureStrategy(int numberOfSatellites, int totalTime, int totalImagingTask) {
-		imagingStatus = new Integer[numberOfSatellites][totalImagingTask][totalTime];
+		imagingStatus = new double[numberOfSatellites][totalImagingTask][totalTime];
 	}
 }

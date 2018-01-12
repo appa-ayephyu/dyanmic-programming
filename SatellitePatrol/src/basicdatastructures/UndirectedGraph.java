@@ -19,6 +19,14 @@ public class UndirectedGraph {
 		public int getNumber() {
 			return this.number;
 		}
+		
+		public int getXPosition() {
+			return this.xPosition;
+		}
+		
+		public int getYPosition() {
+			return this.yPosition;
+		}
 
 	}
 	
@@ -132,6 +140,10 @@ public class UndirectedGraph {
 	
 	public List<Node> getGraph(){
 		return graph;
+	}
+	
+	public Node getNodeWithNumber(int index) {
+		return graph.get(index);
 	}
 	
 }

@@ -2,7 +2,7 @@ package mainpackage;
 
 public class GameSolution {
 	double[][][] defenderStrategy;
-	//AttackerPureStrategy r;
+	AttackerPureStrategy r;
 	double solutionValue;
 	
 	public GameSolution(double[][][] defenderStrategy,  double solutionValue) {

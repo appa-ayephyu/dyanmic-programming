@@ -11,7 +11,7 @@ public class Main {
 	}
 	
 	public static void createGame() {
-		game = new Game(2,2,12);
+		game = new Game(15,15,10);
 		//game.U = 20;
 		GameSolution sol = new SatellitePatrolGame().run(game, true, true);
 	}

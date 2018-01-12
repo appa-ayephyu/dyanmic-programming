@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import basicdatastructures.UndirectedGraph;
+import basicdatastructures.UndirectedGraph.Node;
 
 public class Game {
 	
@@ -14,11 +15,11 @@ public class Game {
 	int T=10; //total time played
 	double U= 8; //value of the important cells
 	int t =1; //time step for the satellite to do imaging task
-	int m = 5; //time steps required for the attacker ship to make the next move
-	List<Integer> importantCells;
+	int m = 1; //time steps required for the attacker ship to make the next move
+	List<Node> importantCells;
 	int[][] startingTime;
 	int[][] endingTime;
-	int period = 5;
+	int period = 1;
 	int imageSize = 3; 	//image size for one
 	int totalStorageCapacity = 30; //total storage for satellite
 	
@@ -59,8 +60,8 @@ public class Game {
 		endingTime = new int[numberOfNodes][numberOfSatellites];
 		for(int i=0; i< numberOfNodes; i++) {
 			for (int v=0; v < numberOfSatellites; v++) {
-				startingTime[i][v]= r.nextInt(T-5);
-				endingTime[i][v] = startingTime[i][v] +5;
+				startingTime[i][v]= r.nextInt(T-this.period);
+				endingTime[i][v] = startingTime[i][v] +this.period;
 			}
 		}
 		
@@ -68,12 +69,18 @@ public class Game {
 	
 	public void createRandomImportantCells(int numberOfImportantCells) {
 
-		importantCells = new ArrayList<Integer>();
+		importantCells = new ArrayList<Node>();
 		Random r = new Random();
+		int cell =  r.nextInt(n-numberOfImportantCells);
+		Node node = this.g.getNodeWithNumber(cell);
+		if(!importantCells.contains(node)) {
+			importantCells.add(node);
+		}
 		while(importantCells.size() < numberOfImportantCells) {
-			int cell =  3; //r.nextInt(n);
-			if(!importantCells.contains(cell)) {
-				importantCells.add(cell);
+			cell =  cell +1;
+			node = this.g.getNodeWithNumber(cell);
+			if(!importantCells.contains(node)) {
+				importantCells.add(node);
 			}
 		}
 	}
