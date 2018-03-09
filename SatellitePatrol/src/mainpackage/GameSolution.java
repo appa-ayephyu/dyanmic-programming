@@ -1,14 +1,11 @@
 package mainpackage;
 
 public class GameSolution {
-	double[][][] defenderStrategy;
-	AttackerPureStrategy r;
+	double[] x;
 	double solutionValue;
 	
-	public GameSolution(double[][][] defenderStrategy,  double solutionValue) {
+	public GameSolution(double[] x,  double solutionValue) {
 		super();
-		this.defenderStrategy = defenderStrategy;
-		//this.r = r;
 		this.solutionValue = solutionValue;
 	}
 	

@@ -1,88 +1,131 @@
 package mainpackage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import basicdatastructures.UndirectedGraph;
-import basicdatastructures.UndirectedGraph.Node;
+import basicdatastructures.AttackersGraph;
 
 public class Game {
 	
-	public UndirectedGraph g;
+	public AttackersGraph attackerGraph;
 	int n; //size of graph, number of nodes
-	int V=1; //number of satellites
-	int T=10; //total time played
-	double U= 8; //value of the important cells
-	int t =1; //time step for the satellite to do imaging task
-	int m = 1; //time steps required for the attacker ship to make the next move
-	List<Node> importantCells;
-	int[][] startingTime;
-	int[][] endingTime;
-	int period = 1;
-	int imageSize = 3; 	//image size for one
-	int totalStorageCapacity = 30; //total storage for satellite
+	int m=2; //number of satellites
+	int tau=12; //total time played //time steps 4 hours
+	double epsilon = 0.5; //global detecting faillure probability of cell 
+	double reward = 10; //reward for attacker
+	double penalty = 5; //penalty for attacker
+	List<Integer> targets; //List of possible targets in the surveillance area
+	int timeToSail = 2; //for ship it takes 900 steps to get to another cell
+	List<HashMap<Integer, List<Integer>>> candidateCells; //candidate cells for each satellite with respect to time step
+	int delta = 2; //number of consecutive time steps to catch the attacker
+	int numberofImages = 2; //storage capacity
+	int gamma = 3; //downloading station points
+	
+	int randomTargets = 2;
+	
+	public Game(AttackersGraph attackerGraph, int m, int tau, double epsilon, double reward, double penalty, List<Integer> targets, List<HashMap<Integer, List<Integer>>> candidateCells) {
+		this.attackerGraph = attackerGraph;
+		this.m = m;
+		this.tau = tau;
+		this.epsilon = epsilon;
+		this.reward = reward;
+		this.penalty = penalty;
+		this.targets = targets;
+		this.candidateCells = candidateCells;
+	}
 	
 	public Game() {
-		g = UndirectedGraph.createGridGraph(3, 1);
-		n = g.getNumberOfNodes();
-		createRandomImportantCells(n/3);
-		setRandomImagingTimeWindow(n, V);
+		createRandomCandidateCells();
+		attackerGraph = AttackersGraph.createGridGraph(7, 7);
+		n = attackerGraph.getNumberOfNodes();
+		createRandomTargets(randomTargets);
 	}
 	
 	public Game(int length,int width) {
-		g = UndirectedGraph.createGridGraph(length, width);
-		n = g.getNumberOfNodes();
-		createRandomImportantCells(n/3);
-		setRandomImagingTimeWindow(n, V);
-	}
-	
-	public Game(int length, int width, int T) {
-		g = UndirectedGraph.createGridGraph(length, width);
-		n = g.getNumberOfNodes();
-		this.T = T;
-		createRandomImportantCells(n/3);
-		setRandomImagingTimeWindow(n, V);
-	}
-	
-	public Game(UndirectedGraph g, int n, int V, int T, int t, int m) {
-		this.g = g;
-		this.n = n;
-		this.V = V;
-		this.T = T;
-		this.t = t;
-		this.m = m;
-	}
-	
-	public void setRandomImagingTimeWindow(int numberOfNodes, int numberOfSatellites) {
-		Random r = new Random();
-		startingTime = new int[numberOfNodes][numberOfSatellites];
-		endingTime = new int[numberOfNodes][numberOfSatellites];
-		for(int i=0; i< numberOfNodes; i++) {
-			for (int v=0; v < numberOfSatellites; v++) {
-				startingTime[i][v]= r.nextInt(T-this.period);
-				endingTime[i][v] = startingTime[i][v] +this.period;
-			}
-		}
+		createRandomCandidateCells();
+		attackerGraph = AttackersGraph.createGridGraph(length, width);
+		n = attackerGraph.getNumberOfNodes();
+		createRandomTargets(randomTargets);
 		
 	}
 	
-	public void createRandomImportantCells(int numberOfImportantCells) {
-
-		importantCells = new ArrayList<Node>();
+	public Game(int length, int width, int tau) {
+		
+		
+		attackerGraph = AttackersGraph.createGridGraph(length, width);
+		n = attackerGraph.getNumberOfNodes();
+		this.tau = tau;
+		createRandomCandidateCells();
+		//		printing
+//		for(int r=0; r<candidateCells.size(); r++) {
+//			System.out.println("For satellite" + r);
+//			HashMap<Integer, List<Integer>> hash = candidateCells.get(r);
+//			for(int t=0; t<this.tau; t++) {
+//				System.out.print("Time: " + t + "Candidate Cells :  {");
+//				for(int k=0; k<hash.get(t).size(); k++) {
+//					System.out.print(hash.get(t).get(k) + ",");
+//				}
+//				System.out.println();
+//			}
+//		}
+		createRandomTargets(randomTargets);
+	}
+	
+	public void createRandomTargets(int numberOfTargets) {
+		targets = new ArrayList<Integer>();
 		Random r = new Random();
-		int cell =  r.nextInt(n-numberOfImportantCells);
-		Node node = this.g.getNodeWithNumber(cell);
-		if(!importantCells.contains(node)) {
-			importantCells.add(node);
-		}
-		while(importantCells.size() < numberOfImportantCells) {
-			cell =  cell +1;
-			node = this.g.getNodeWithNumber(cell);
-			if(!importantCells.contains(node)) {
-				importantCells.add(node);
+		while(targets.size() < numberOfTargets) {
+			int location = r.nextInt(n);
+			if(!targets.contains(location)) {
+				targets.add(location);
 			}
 		}
+	}
+	
+	public void createRandomCandidateCells() {
+		candidateCells = new ArrayList<HashMap<Integer, List<Integer>>>();
+		for (int r = 0; r < this.m; r++) {
+			HashMap<Integer, List<Integer>> hashMap = new HashMap<Integer, List<Integer>>();
+			Random rand = new Random();
+			for (int t = 0; t < this.tau; t++) {
+				List<Integer> cells = new ArrayList<Integer>();
+				while (cells.size()<2) {
+					int haha = rand.nextInt(this.n);
+					if (!cells.contains(haha)) {
+						cells.add(haha);
+					}
+				}
+				hashMap.put(t, cells);
+			}
+			candidateCells.add(hashMap);
+		}
+	}
+	
+	public int getNumberOfNodes() {
+		return attackerGraph.getNumberOfNodes();
+	}
+	
+	public String toString(){
+		String result ="";
+		result=result+"n = "+n+"\n";
+		result=result+"m = "+m+"\n";
+		result=result+"tau = "+tau+"\n";
+		result=result+"fe = "+epsilon+"\n";
+		result=result+"]\n";
+		result.trim();
+		result=result+"]\n";
+		result=result+"U = [ ";
+		result.trim();
+		result=result+"]\n";
+		result=result+"Targets = {";
+		for (int i:targets){
+			result=result+i+" ";
+		}
+		result.trim();
+		result=result+"}\n";
+		return result;
 	}
 	
 }
