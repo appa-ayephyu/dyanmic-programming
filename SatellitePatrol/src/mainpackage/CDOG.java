@@ -72,8 +72,8 @@ public class CDOG {
 
 				IloLinearNumExpr mixedUtility = cplex.linearNumExpr();
 				for (int i = 0; i < x.length; i++) {
-					double utilityOfDefenderPureStrategy = calculateUtility(defendersPureStrategies.get(i), att);
-					mixedUtility.addTerm(utilityOfDefenderPureStrategy, x[i]);
+					double utilityOfAttackersPureStrategy = calculateUtility(defendersPureStrategies.get(i), att);
+					mixedUtility.addTerm(utilityOfAttackersPureStrategy, x[i]);
 				}
 				mixedUtility.addTerm(1.0, utility);
 				cplex.addLe(mixedUtility, 0.0, "c1");
@@ -88,6 +88,10 @@ public class CDOG {
 			double[] mixedProbability = new double[defendersPureStrategies.size()];
 			for (int i = 0; i < mixedProbability.length; i++) {
 				mixedProbability[i] = cplex.getValue(x[i]);
+				if(mixedProbability[i] >0) {
+					defendersPureStrategies.get(i);
+					System.out.println(mixedProbability[i]);
+				}
 			}
 			result = new GameSolution(mixedProbability, solutionValue);
 		} catch (IloException e) {
@@ -109,9 +113,9 @@ public class CDOG {
 		}
 		// probabilty of consecutive detection
 		double probability = 1.0;
-		for (int k = 0; k < game.tau - game.delta + 1; k++) {
+		for (int k = 0; k < game.tau - game.delta; k++) {
 			double probabilityK = 1.0;
-			for (int j = k; j < k + game.delta - 1; j++) {
+			for (int j = k; j < k + game.delta; j++) {
 				probabilityK *= (1 - game.epsilon) * indicatorG[j];
 			}
 			probability *= 1 - probabilityK;

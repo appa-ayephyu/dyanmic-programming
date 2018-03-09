@@ -19,7 +19,7 @@ public class Game {
 	List<Integer> targets; //List of possible targets in the surveillance area
 	int timeToSail = 2; //for ship it takes 900 steps to get to another cell
 	List<HashMap<Integer, List<Integer>>> candidateCells; //candidate cells for each satellite with respect to time step
-	int delta = 2; //number of consecutive time steps to catch the attacker
+	int delta = 1; //number of consecutive time steps to catch the attacker
 	int numberofImages = 2; //storage capacity
 	int gamma = 3; //downloading station points
 	
