@@ -41,13 +41,8 @@ public class CDOG {
 		initialize(g, CLP, AOonly);
 		GameSolution currentSolution = new GameSolution();
 		boolean graphChanged = true;
-		double ctime;
-		double AOtime = 0;
-		double DOtime = 0;
-		double CLPtime = 0;
 		while (graphChanged) {
 			graphChanged = false;
-			ctime = System.nanoTime();
 			currentSolution = linearProgram(defendersPureStrategies, setOfattackersStrategiesY);
 		}
 		return currentSolution;
@@ -81,7 +76,7 @@ public class CDOG {
 				for (int i = 0; i < x.length; i++) {
 					totalDistribution.addTerm(1.0, x[i]);
 				}
-				cplex.addLe(totalDistribution, 1.0, "c2");
+				cplex.addEq(totalDistribution, 1.0, "c2");
 			}
 			cplex.solve();
 			double solutionValue = cplex.getObjValue();
@@ -140,7 +135,7 @@ public class CDOG {
 			totalVariantCount *= setOfSurveillancePatrolForEachSatellite.get(r).size();
 		}
 		if(totalVariantCount <0) {
-			System.out.println();
+			System.out.println("total strategy count overflow");
 		}
 		defenderPureStrategiesS = enumeratePureStrategies(setOfSurveillancePatrolForEachSatellite, totalVariantCount);
 		return defenderPureStrategiesS;
@@ -228,23 +223,24 @@ public class CDOG {
 
 	public List<AttackersPureStrategy> createAllAttackersStrategies() {
 		List<AttackersPureStrategy> attackersPureStrategiesY = new ArrayList<AttackersPureStrategy>();
-		for (int i = 0; i < game.getNumberOfNodes(); i++) {
-			List<List<Integer>> paths = createAllAttackersStrategiesFrom(i, 0);
+		//for (int i = 0; i < game.getNumberOfNodes(); i++) {
+			List<List<Integer>> paths = createAllAttackersStrategiesFrom(0, 0); //known satarting point
 			paths.size();
 			for (List<Integer> path : paths) {
 				Collections.reverse(path);
 				path = transformAttackersPathToOneStepInterval(path, game.timeToSail);
 				attackersPureStrategiesY.add(new AttackersPureStrategy(path));
 			}
-		}
+		//}
 		return attackersPureStrategiesY;
 	}
 
 	public List<Integer> transformAttackersPathToOneStepInterval(List<Integer> path, int timeToSail) {
 		
 		List<Integer> newPath = new ArrayList<Integer>();
+		newPath.add(path.get(0));
 		for (int k = 0; k < path.size() - 1; k++) {
-			newPath.add(path.get(k));
+			
 			if (timeToSail > 2) {
 				for (int j = 0; j < timeToSail / 2; j++) {
 					newPath.add(path.get(k));
