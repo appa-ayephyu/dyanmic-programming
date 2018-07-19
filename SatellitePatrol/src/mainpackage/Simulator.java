@@ -1,15 +1,19 @@
 package mainpackage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import basicdatastructures.SurveillancePatrols;
+
 public class Simulator {
 	
 	
 	public static void main(String[] args) {
 		
-		double startingtime = System.nanoTime();
-		Game game = new Game(3, 3, 6); // tentative
+		Game game = new Game(2, 2, 6); // tentative
+		game.m = 2;
 		new CDOG().run(game, false, true);
-		System.out.println("Time:" + ((System.nanoTime() - startingtime) / 1000000000));
-		
 //		double startingtime = System.nanoTime();
 //		int numberRuns = 1;
 //		for (int t = 16; t <= 31; t = t + 5) {
